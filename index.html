@@ -5,13 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts Header -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Island+Moments&family=Nunito:wght@200;600&family=Secular+One&family=Source+Code+Pro:wght@500&family=Vujahday+Script&display=swap" rel="stylesheet">
+    <!-- Google Fonts Body -->
+    <!-- main heading-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Island+Moments&family=Nunito:wght@200;600&family=Open+Sans+Condensed:wght@300&family=Secular+One&family=Source+Code+Pro:wght@500&family=Vujahday+Script&display=swap" rel="stylesheet">
+    <!-- h2 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Island+Moments&family=Licorice&family=Nunito:wght@200;600&family=Open+Sans+Condensed:wght@300&family=Secular+One&family=Source+Code+Pro:wght@500&family=Vujahday+Script&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1 id="heading">Find the buried treasure!</h1>
-	<p id="clickcounter"></p>
-	<img id= "map" width ="750" height ="500" src="treasuremap.png">
-	<p id = "distance"></p>
-	<script src ="https://code.jquery.com/jquery-2.1.0.js"></script>
-    <script src="index.js"></script>
+    <h1>Treasure Map</h1>
+    <main>
+        <h2>Try to find the treasure!</h2>
+        <canvas id="canvas" width="700px" height="400px"></canvas>
+        <aside>
+            <p>You have <br /> <span id="clickcounter">20</span><br />clicks left</p>
+        </aside>
+        <div id="message">
+            <p id ="distance">AAARRG, Good Luck, Matee!</p>
+            <p>Highscore: <span id="highscore"></span></p>
+        </div>
+        
+    </main>
+	
+    
+	
+
+
+<script src ="https://code.jquery.com/jquery-2.1.0.js"></script>
+<script src="index.js"></script>
 </body>
 </html>
