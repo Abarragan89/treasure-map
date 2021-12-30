@@ -64,17 +64,16 @@ function dig (event) {
     $("#distance").text(distanceHint);
     $("#clickcounter").text(target1.clicks);
     // If you Win!
-    if (distance < 10 ) {
+    if (distance < 15 ) {
         target1.drawCircle();
         alert("You found the treasure in and kept " + target1.clicks + "!!");
         gameEnd();
-    // If you lose
+    // If you lose.
     }if (target1.clicks <= 0) {
         target1.drawCircle();
         alert("GAME OVER: You ran out of guesses!");
         gameEnd();
     }
-    target1.drawCircle();
 }
 //When you run out of clicks or win. 
 function gameEnd () {
