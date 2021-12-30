@@ -63,11 +63,14 @@ main #canvas {
     border: .5vw solid var(--secondary-color);
     width: 65vw;
     z-index: 1;
+    opacity: .5;
 }
 #canvas:hover {
     cursor: pointer;
 }
 main aside {
+    display: flex;
+    flex-direction: column;
     grid-column: 11 / 13;
     grid-row: 2 / 5;
     font-size: 4vw;
@@ -89,4 +92,26 @@ main #message {
 }
 #clickcounter {
     color: var(--accent-color);
+}
+
+/* Button Styles */
+#start-stop {
+    margin: 5%;
+    padding: 20% 0;
+    border-radius: 5px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    letter-spacing: .2vw;
+    font-size: 3.5vw;
+    color: var(--accent-color);
+    background-color: var(--bg-clr);
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 0  10px black ;
+}
+#start-stop:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-color)
+}
+#start-stop:active {
+    color: white;
+    box-shadow: none;
 }
