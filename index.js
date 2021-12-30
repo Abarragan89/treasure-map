@@ -20,8 +20,8 @@ function canvasSetUp () {
 
 //calculate distance between treasure and click
 var getDistance = function (event) {
-    var diffX = event.clientX - target1.x;
-    var diffY = event.clientY - target1.y;
+    var diffX = event.offsetX - target1.x;
+    var diffY = event.offsetY - target1.y;
     return Math.sqrt((diffX * diffX) + (diffY * diffY));
 };
 //Target Object
@@ -38,7 +38,6 @@ class Target {
         let y = getRandomNumber(this.height);
         this.x = x;
         this.y = y;
-        console.log(x, y)
     }
     subtractClick () {
         this.clicks -= 1;
@@ -54,56 +53,55 @@ class Target {
         ctx.stroke();
         ctx.closePath();
     }
-};
-// Make New Target Object and Place it. 
-let target1 = new Target(20, canvas.width, canvas.height);
-target1.randomSpot();
-
+}; 
 //Canvas Click Event
-
-
 // Dig a hole 
 function dig (event) {
     drawStrikes(event)
     target1.subtractClick();
-    var distance = getDistance(event, target1.randomSpot);
-    console.log("distance " + distance)
+    var distance = getDistance(event);
     var distanceHint = getDistanceHint(distance);
-    console.log("distanceHint " + distanceHint)
     $("#distance").text(distanceHint);
     $("#clickcounter").text(target1.clicks);
     // If you Win!
     if (distance < 10 ) {
         target1.drawCircle();
-        
-        alert("You found the treasure in " + clicks + " clicks!");
+        alert("You found the treasure in and kept " + target1.clicks + "!!");
         gameEnd();
     // If you lose
     }if (target1.clicks <= 0) {
         target1.drawCircle();
-        
         alert("GAME OVER: You ran out of guesses!");
         gameEnd();
-
     }
+    target1.drawCircle();
 }
 //When you run out of clicks or win. 
 function gameEnd () {
-    $("#canvas").css("opacity", "0.6");
     canvas.removeEventListener("click", dig);
-
-    
+        $("#start-stop").prop("value", "reset");
 }
 
 //Start / Stop button 
+// Make New Target Object and Place it.
 $("#start-stop").click(function () {
+    // Raise opacity, clear the screen, and spot new target
     $("#canvas").css("opacity", "1")
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     canvasSetUp();
-    target1 = new Target(15, canvas.width, canvas.height);
+    target1 = new Target(20, canvas.width, canvas.height);
     target1.randomSpot();
+    // Add event listener and display clicks.
     canvas.addEventListener("click", dig);
     $("#clickcounter").text(target1.clicks);
+    // Set the text of the input button
+    let btn = document.getElementById("start-stop");
+    if (btn.value == "start") {
+        btn.value = "reset"
+    } else if (btn.value == "reset") {
+        btn.value = "start"
+    }
+
 })
 
 //How close is the player
@@ -130,8 +128,6 @@ function drawStrikes (event) {
     // Get coordinates of mouse event relative to canvas
     const playingArea = document.querySelector('canvas#canvas')
     let rect = playingArea.getBoundingClientRect();
-    console.log(event);
-    console.log(rect);
     let x = event.offsetX;
     let y = event.offsetY;
 
