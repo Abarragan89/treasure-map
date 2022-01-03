@@ -1,11 +1,13 @@
 :root {
-    --primary-color: rgb(186, 146, 86);
-    --secondary-color: rgb(135, 19, 19);
-    --bg-clr: rgb(193, 203, 0);
-    --tertriary-color: rgb(255, 255, 255);
-    --accent-color: rgb(12, 111, 12);
+    --primary-color: rgb(113, 22, 22);
+    --secondary-color: rgb(125, 71, 6);
+    --bg-clr: rgb(174, 140, 104);
+    --tertriary-color: rgb(72, 203, 251);
+    --accent-color: rgb(111, 37, 5);
     --primary-font:'Vujahday Script', cursive;
     --secondary-font:'Licorice', cursive;
+    --highlight-color: rgb(77, 120, 51);
+
 }
 * {
     padding: 0;
@@ -19,26 +21,26 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(2, 2, 2);
 
 
 }
 body h1 {
-    color:var(--bg-clr);
-    background: linear-gradient(var(--secondary-color),black);
+    color:var(--primary-color);
+    background: linear-gradient(var(--tertriary-color),black);
     padding-top: 1vw;
-    font-size: 7vw;
+    font-size: 9vw;
     background-color: var(--primary-color);
     width: 100%;
     text-align: center;
     font-family: var(--secondary-font);
     z-index: 1;
-    border-bottom: 1px solid rgb(186, 179, 179);
+    border-bottom: 1px solid rgb(195, 184, 184);
     
 }
 main {
     padding: 1vw;
-    background: linear-gradient(black 50%, var(--secondary-color));
+    background: linear-gradient(rgb(7, 54, 69) 50%, var(--tertriary-color));
     display:grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(4, 1fr);
@@ -52,10 +54,10 @@ main h2 {
     grid-column: 1 / 13;
     font-size: 20px;
     align-self: end;
-    font-size: 5vw;
+    font-size: 3.5vw;
     text-align: center;
     font-family: var(--primary-font);
-    color: var(--accent-color);
+    color: rgb(210, 201, 201);
 }
 main #canvas {
     grid-column: 1 / 11;
@@ -75,7 +77,7 @@ main aside {
     font-size: 4vw;
     text-align: center;
     border: .5vw solid var(--secondary-color);
-    color:var(--bg-clr);
+    color:black;
 
 }
 main #message {
@@ -84,13 +86,15 @@ main #message {
     text-align: center;
     align-self: start;
     width: 100%;
-    color: var(--secondary-color);
-    font-size: 1.5vw;
+    color: var(--accent-color);
+    font-size: 2vw;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 900;
 }
 #clickcounter {
-    color: var(--accent-color);
+    color: black;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
 }
 
 /* Button Styles */
@@ -107,8 +111,7 @@ main #message {
     box-shadow: 0 0  10px black ;
 }
 #start-stop:hover {
-    background-color: var(--accent-color);
-    color: var(--bg-color)
+    box-shadow: none;
 }
 #start-stop:active {
     color: white;

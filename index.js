@@ -34,8 +34,8 @@ class Target {
         this.y = undefined;
     }
     randomSpot () {
-        let x = getRandomNumber(this.width);
-        let y = getRandomNumber(this.height);
+        let x = getRandomNumber(this.width - 10);
+        let y = getRandomNumber(this.height - 10);
         this.x = x;
         this.y = y;
     }
@@ -63,10 +63,11 @@ function dig (event) {
     var distanceHint = getDistanceHint(distance);
     $("#distance").text(distanceHint);
     $("#clickcounter").text(target1.clicks);
+    
     // If you Win!
     if (distance < 15 ) {
         target1.drawCircle();
-        alert("You found the treasure in and kept " + target1.clicks + "!!");
+        alert("You found the treasure and kept " + target1.clicks + "!!");
         gameEnd();
     // If you lose.
     }if (target1.clicks <= 0) {
