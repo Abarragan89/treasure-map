@@ -65,7 +65,7 @@ class Target {
 //Canvas Click Event
 // Dig a hole 
 function dig(event) {
-    drawRipple (event)
+    // drawRipple (event)
     drawStrikes(event)
     target1.subtractClick();
     var distance = getDistance(event);
@@ -121,7 +121,9 @@ $("#start-stop").click(function () {
 
 //How close is the player
 var getDistanceHint = function (distance) {
-    if (distance < 25) {
+    if (distance < 15){
+        return "YOU FOUND IT!!!!"
+    } else if (distance < 25) {
         return "YOU CAN'T GET ANY CLOSER! (25 FEET AWAY)"
     } else if (distance < 45) {
         return "Really hot stuff!!(45 FEET AWAY)";
