@@ -1,11 +1,10 @@
-// Initial Global Canvas Set Up
 let canvas = document.getElementById('canvas')
 let ctx = canvas.getContext('2d');
 let pic = new Image();
 pic.src = "https://m.media-amazon.com/images/I/81jIoI7cbiL._AC_SL1500_.jpg"
 pic.addEventListener('load', function () { ctx.drawImage(pic, 0, 0, canvas.width, canvas.height) }, false);
 
-// Function to make Canvas Responsive
+// function to Make image dynamic
 function initCanvas() {
     const dynamicWidth = window.innerWidth * 0.63;
     document.getElementById('canvas').width = Math.floor(dynamicWidth);
@@ -13,7 +12,6 @@ function initCanvas() {
     //Setting up image on Canvas
     canvasSetUp();
 }
-// listn
 window.addEventListener('resize', initCanvas);
 window.addEventListener('load', initCanvas);
 
@@ -21,8 +19,6 @@ window.addEventListener('load', initCanvas);
 var getRandomNumber = function (size) {
     return Math.floor(Math.random() * size);
 };
-
-// function to put image on canvas
 function canvasSetUp() {
     let canvas = document.getElementById('canvas')
     let ctx = canvas.getContext('2d');
@@ -30,6 +26,7 @@ function canvasSetUp() {
     pic.src = "https://m.media-amazon.com/images/I/81jIoI7cbiL._AC_SL1500_.jpg"
     pic.addEventListener('load', function () { ctx.drawImage(pic, 0, 0, canvas.width, canvas.height) }, false);
 }
+
 
 //calculate distance between treasure and click
 var getDistance = function (event) {
@@ -56,13 +53,8 @@ class Target {
         this.clicks -= 1;
     }
     drawCircle() {
-        let x = this.x;
-        let y = this.y;
-
-        console.table({ x, y });
-
         ctx.beginPath();
-        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
         ctx.fillStyle = 'red';
         ctx.fill();
         ctx.strokeStyle = 'black';
@@ -73,6 +65,7 @@ class Target {
 //Canvas Click Event
 // Dig a hole 
 function dig(event) {
+    drawRipple (event)
     drawStrikes(event)
     target1.subtractClick();
     var distance = getDistance(event);
@@ -83,17 +76,23 @@ function dig(event) {
     // If you Win!
     if (distance < 15) {
         target1.drawCircle();
-        alert("You found the treasure and kept " + target1.clicks + "!!");
-        gameEnd();
+        setTimeout(gameEnd, 1000, "win");
+        
         // If you lose.
     } if (target1.clicks <= 0) {
         target1.drawCircle();
-        alert("GAME OVER: You ran out of guesses!");
-        gameEnd();
+        setTimeout(gameEnd, 1000, "lose");
     }
 }
 //When you run out of clicks or win. 
-function gameEnd() {
+function gameEnd(outcome) {
+    switch(outcome){
+        case "win": 
+            alert("You found the treasure and kept " + target1.clicks + "!!");
+            break;
+        default:
+            alert("GAME OVER: You ran out of guesses!");
+    }
     canvas.removeEventListener("click", dig);
     $("#start-stop").prop("value", "reset");
 }
@@ -104,7 +103,7 @@ $("#start-stop").click(function () {
     // Raise opacity, clear the screen, and spot new target
     $("#canvas").css("opacity", "1");
     canvasSetUp();
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
     target1 = new Target(20, canvas.width, canvas.height);
     target1.randomSpot();
     // Add event listener and display clicks.
@@ -142,11 +141,8 @@ var getDistanceHint = function (distance) {
 // functions for marking map. 
 function drawStrikes(event) {
     // Get coordinates of mouse event relative to canvas
-    const playingArea = document.querySelector('canvas#canvas')
     let x = event.offsetX;
     let y = event.offsetY;
-
-    console.table({ x, y });
 
     // Draw Circle with X and Y of mouse click
     ctx.beginPath();
@@ -156,4 +152,26 @@ function drawStrikes(event) {
     ctx.strokeStyle = "#000000"
     ctx.stroke();
     ctx.closePath();
+}
+
+function drawRipple (event) {
+    let radius = getDistance(event);
+    let x = event.offsetX;
+    let y = event.offsetY;
+    for (let i = 0; i < radius; i++) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(x, y, i, 0, Math.PI * 2)
+            ctx.strokeStyle = "white";
+            ctx.strokeWidth = "6px"
+            ctx.stroke();
+            ctx.closePath();
+            ctx.restore();
+            
+        // ctx.clearRect(x - i - 1, y - i - 1, i * 2 + 2, i * 2 + 2);
+
+        // // ctx.clearRect(x, y, (20 + i), (10 + i));
+        // ctx.closePath();
+        // canvasSetUp();
+    }
 }
